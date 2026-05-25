@@ -21,12 +21,40 @@ const {
  */
 router.get("/", getProducts);
 
+/**
+ * @swagger
+ * /products/{id}:
+ *   get:
+ *     summary: Get product by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ */
 router.get("/:id", getProductById);
 
+/**
+ * @swagger
+ * /products:
+ *   post:
+ *     summary: Create product
+ */
 router.post("/", createProduct);
 
+/**
+ * @swagger
+ * /products/{id}:
+ *   put:
+ *     summary: Update product
+ */
 router.put("/:id", updateProduct);
 
+/**
+ * @swagger
+ * /products/{id}:
+ *   delete:
+ *     summary: Delete product
+ */
 router.delete("/:id", deleteProduct);
 
 module.exports = router;
