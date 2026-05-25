@@ -24,12 +24,14 @@ const swaggerOptions = {
       version: "1.0.0",
       description: "CRUD API for Sefa Tees",
     },
+
     servers: [
       {
-        url: "http://localhost:3000",
+        url: "https://sefa-tees-api.onrender.com",
       },
     ],
   },
+
   apis: ["./src/routes/*.js"],
 };
 
