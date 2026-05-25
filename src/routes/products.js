@@ -30,6 +30,11 @@ router.get("/", getProducts);
  *       - in: path
  *         name: id
  *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Product found
  */
 router.get("/:id", getProductById);
 
@@ -38,6 +43,30 @@ router.get("/:id", getProductById);
  * /products:
  *   post:
  *     summary: Create product
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               brand:
+ *                 type: string
+ *               size:
+ *                 type: string
+ *               color:
+ *                 type: string
+ *               price:
+ *                 type: number
+ *               stock:
+ *                 type: number
+ *               category:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Product created
  */
 router.post("/", createProduct);
 
@@ -46,6 +75,36 @@ router.post("/", createProduct);
  * /products/{id}:
  *   put:
  *     summary: Update product
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               brand:
+ *                 type: string
+ *               size:
+ *                 type: string
+ *               color:
+ *                 type: string
+ *               price:
+ *                 type: number
+ *               stock:
+ *                 type: number
+ *               category:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Product updated
  */
 router.put("/:id", updateProduct);
 
@@ -54,6 +113,15 @@ router.put("/:id", updateProduct);
  * /products/{id}:
  *   delete:
  *     summary: Delete product
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Product deleted
  */
 router.delete("/:id", deleteProduct);
 
