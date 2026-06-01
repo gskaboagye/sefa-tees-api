@@ -2,6 +2,8 @@ const express = require("express");
 
 const router = express.Router();
 
+const isAuthenticated = require("../middleware/authenticate");
+
 const {
   getOrders,
   getOrderById,
@@ -43,6 +45,8 @@ router.get("/:id", getOrderById);
  * /orders:
  *   post:
  *     summary: Create order
+ *     security:
+ *       - githubAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -63,14 +67,18 @@ router.get("/:id", getOrderById);
  *     responses:
  *       201:
  *         description: Order created
+ *       401:
+ *         description: Unauthorized
  */
-router.post("/", createOrder);
+router.post("/", isAuthenticated, createOrder);
 
 /**
  * @swagger
  * /orders/{id}:
  *   put:
  *     summary: Update order
+ *     security:
+ *       - githubAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -97,14 +105,18 @@ router.post("/", createOrder);
  *     responses:
  *       200:
  *         description: Order updated
+ *       401:
+ *         description: Unauthorized
  */
-router.put("/:id", updateOrder);
+router.put("/:id", isAuthenticated, updateOrder);
 
 /**
  * @swagger
  * /orders/{id}:
  *   delete:
  *     summary: Delete order
+ *     security:
+ *       - githubAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -114,7 +126,9 @@ router.put("/:id", updateOrder);
  *     responses:
  *       200:
  *         description: Order deleted
+ *       401:
+ *         description: Unauthorized
  */
-router.delete("/:id", deleteOrder);
+router.delete("/:id", isAuthenticated, deleteOrder);
 
 module.exports = router;

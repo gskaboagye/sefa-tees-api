@@ -1,6 +1,7 @@
 const express = require("express");
-
 const router = express.Router();
+
+const isAuthenticated = require("../middleware/authenticate");
 
 const {
   getProducts,
@@ -43,6 +44,8 @@ router.get("/:id", getProductById);
  * /products:
  *   post:
  *     summary: Create product
+ *     security:
+ *       - githubAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -67,14 +70,18 @@ router.get("/:id", getProductById);
  *     responses:
  *       201:
  *         description: Product created
+ *       401:
+ *         description: Unauthorized
  */
-router.post("/", createProduct);
+router.post("/", isAuthenticated, createProduct);
 
 /**
  * @swagger
  * /products/{id}:
  *   put:
  *     summary: Update product
+ *     security:
+ *       - githubAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -105,14 +112,18 @@ router.post("/", createProduct);
  *     responses:
  *       200:
  *         description: Product updated
+ *       401:
+ *         description: Unauthorized
  */
-router.put("/:id", updateProduct);
+router.put("/:id", isAuthenticated, updateProduct);
 
 /**
  * @swagger
  * /products/{id}:
  *   delete:
  *     summary: Delete product
+ *     security:
+ *       - githubAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -122,7 +133,9 @@ router.put("/:id", updateProduct);
  *     responses:
  *       200:
  *         description: Product deleted
+ *       401:
+ *         description: Unauthorized
  */
-router.delete("/:id", deleteProduct);
+router.delete("/:id", isAuthenticated, deleteProduct);
 
 module.exports = router;
